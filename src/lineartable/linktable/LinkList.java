@@ -1,5 +1,7 @@
 package lineartable.linktable;
 
+import node.Node;
+
 /**
  * 带头节点的单向链表.
  * User: huang
@@ -148,9 +150,10 @@ public class LinkList<T> {
             throw new IndexOutOfBoundsException("索引越界");
         }
         int i = 0;
-        Node<T> node = head;
+        Node<T> node = head.getNext();
         while (i < index - 1) {
             node = node.getNext();
+            i++;
         }
         if (node.getNext() != null) {
             node.setNext(node.getNext().getNext());

@@ -1,4 +1,4 @@
-package lineartable.linktable;
+package node;
 
 /**
  * 链表节点.
