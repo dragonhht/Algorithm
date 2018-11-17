@@ -68,4 +68,54 @@ public class Sort {
         }
     }
 
+    /**
+     * 快速排序.
+     */
+    @Test
+    public void testQuickSort() {
+        quickSort(array, 0, array.length - 1);
+    }
+
+    private void quickSort(int[] arr, int begin, int end) {
+        if (begin < end) {
+            int key = arr[begin];
+            int i = begin;
+            int j = end;
+            while (i < j) {
+                while (i < j && arr[j] > key) {
+                    j--;
+                }
+                if(i < j) {
+                    arr[i] = arr[j];
+                    i++;
+                }
+                while (i < j && arr[i] < key) {
+                    i++;
+                }
+                if (i < j) {
+                    arr[j] = arr[i];
+                    j--;
+                }
+            }
+            arr[i] = key;
+            quickSort(arr, begin, i-1);
+            quickSort(arr, i + 1, end);
+        }
+    }
+
+    /**
+     * 插入排序.
+     */
+    @Test
+    public void testInsertSort() {
+        for (int i = 1; i < array.length; i++) {
+            int temp = array[i];
+            int j = i;
+            for (; j > 0 && array[j - 1] > temp; j--) {
+                array[j] = array[j - 1];
+            }
+            array[j] = temp;
+        }
+    }
+
 }
