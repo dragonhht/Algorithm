@@ -110,3 +110,56 @@ public void testInsertSort() {
     }
 }
 ```
+
+-   希尔排序
+
+```
+/**
+ * 希尔排序.
+ */
+@Test
+public void testShellSort() {
+    for (int k = array.length / 2; k > 0; k /= 2) {
+        for (int i = k; i < array.length; i++) {
+            for (int j = i; j >= k; j -= k) {
+                if (array[j - k] > array[j]) {
+                    int temp = array[j - k];
+                    array[j - k] = array[j];
+                    array[j] = temp;
+                }
+            }
+        }
+    }
+}
+```
+
+-   简单选择排序
+
+> 每次在待排序的数组中选择最大的或最小的进行排序
+
+```
+/**
+ * 简单选择排序.
+ */
+@Test
+public void testSelectSort() {
+    int len = array.length;
+    for (int i = 0; i < len; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < len; j++) {
+            if (array[j] < array[minIndex]) {
+                minIndex = j;
+            }
+        }
+        if (minIndex != i) {
+            int temp = array[minIndex];
+            array[minIndex] = array[i];
+            array[i] = temp;
+        }
+    }
+}
+```
+
+## 搜索
+
+
