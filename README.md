@@ -162,4 +162,28 @@ public void testSelectSort() {
 
 ## 搜索
 
+-   二分查找
 
+```
+/**
+ * 二分查找法.
+ */
+@Test
+public void testBinarySearch() {
+    int low = 0, height = array.length - 1;
+    int mid;
+    while (low <= height) {
+        mid = low + (height - low) / 2;
+        if (array[mid] == key) {
+            System.out.println(mid);
+            return;
+        }
+        if (array[mid] > key) {
+            height = mid - 1;
+        } else {
+            low = mid + 1;
+        }
+    }
+    System.out.println("未查询到目标: " + key);
+}
+```
