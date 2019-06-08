@@ -29,5 +29,87 @@ public class OneTest {
     }
 
 
+    @Test
+    public void testBoolean() {
+        Random random = new Random();
+        int row = 20, col = 20;
+        boolean[][] booleans = new boolean[row][col];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                int n = random.nextInt(2);
+                if (n == 0) {
+                    booleans[i][j] = false;
+                } else {
+                    booleans[i][j] = true;
+                }
+            }
+        }
 
+        printBooleans(booleans);
+    }
+
+    /**
+     * 打印二维布尔数组，并打印行号和列号
+     */
+    private void printBooleans(boolean[][] booleans) {
+        int row = booleans.length, col = booleans[0].length;
+        int colIndex = 0, rowIndex = 0;
+        for (int i = 0; i < row; i++) {
+            if (i == 0) {
+                System.out.printf("%-3s", " ");
+                for (int j = 0; j < col; j++) {
+                    System.out.printf("%-3d", j + 1);
+                }
+                System.out.println();
+            }
+            for (int j = 0; j < col; j++) {
+                if (j == 0) {
+                    System.out.printf("%-3d", i + 1);
+                }
+                if (booleans[i][j]) {
+                    System.out.printf("%-3s", "*");
+                } else {
+                    System.out.printf("%-3s", " ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    private void print(int[][] arrays) {
+        int row = arrays.length, col = arrays[0].length;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                System.out.printf("%3d", arrays[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+    /**
+     * M, N 的矩阵进行转置.
+     */
+    @Test
+    public void test_1_1_13() {
+        int row = 10, col = 11;
+        Random random = new Random();
+        int[][] arrays = new int[row][col];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                arrays[i][j] = random.nextInt(100);
+            }
+        }
+
+        print(arrays);
+
+        System.out.println("--------------转置-------------------------");
+        int[][] result = new int[col][row];
+        // 进行转置
+        for (int i = 0; i < col; i++) {
+            for (int j = 0; j < row; j++) {
+                result[i][j] = arrays[j][i];
+            }
+        }
+        print(result);
+    }
 }
