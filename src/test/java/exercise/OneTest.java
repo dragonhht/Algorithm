@@ -112,4 +112,20 @@ public class OneTest {
         }
         print(result);
     }
+
+    /**
+     * 计算log2N的最大整数
+     */
+    @Test
+    public void bigLog2N() {
+        Random random = new Random();
+        int result = 0;
+        int insert = random.nextInt(1000);
+        int insertNum = insert;
+        for (; insert / 2 > 0; insert = insert / 2) {
+            result++;
+        }
+        System.out.println(insertNum + " 的最大正整数为: " + result);
+        System.out.println(Math.log(insertNum) / Math.log(2));
+    }
 }
