@@ -187,3 +187,5 @@ public void testBinarySearch() {
     System.out.println("未查询到目标: " + key);
 }
 ```
+
+-   [前序、后序、中序表达式](./src/test/java/stack/ExpressionTest.java)
