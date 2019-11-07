@@ -133,6 +133,7 @@ public class Zip {
             newBytes[index++] = (byte) Integer.parseInt(byteStr, 2);
             // TODO 输出最后一个二进制字符串的长度 7
             if (index >= len) {
+                System.out.println(byteStr);
                 System.out.println("最后一位长度: " + byteStr.length());
             }
         }
@@ -144,14 +145,14 @@ public class Zip {
      * @param bt
      * @return
      */
-    private static String byteToString(byte bt, boolean flag) {
+    private static String byteToString(byte bt, int len) {
         int n = bt;
-        if (flag)
-            n |= 256;
+        n |= 256;
         String str = Integer.toBinaryString(n);
-        if (flag)
+        if (len == 8) {
             return str.substring(str.length() - 8);
-        return str;
+        }
+        return str.substring(str.length() - len);
     }
 
     /**
@@ -161,19 +162,48 @@ public class Zip {
      */
     public static byte[] unZip(byte[] bytes, Map<Byte, String> codeMap) {
         Map<String, Byte> decodeMap = getDecodeMap(codeMap);
-        for (byte bt : bytes) {
-
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < bytes.length; i++) {
+            if (i == bytes.length - 1) {
+                // TODO 最后一位为7位，后面得做处理
+                sb.append(byteToString(bytes[i], 7));
+                continue;
+            }
+            sb.append(byteToString(bytes[i], 8));
         }
-        return null;
+        List<Byte> byteList = new ArrayList<>();
+        String str = sb.toString();
+        int index = 0;
+        while (index < str.length()) {
+            int count = 1;
+            boolean flag = true;
+            while (flag) {
+                String s = str.substring(index, index + count);
+                Byte bt = decodeMap.get(s);
+                if (bt != null) {
+                    byteList.add(bt);
+                    flag = false;
+                } else {
+                    count++;
+                }
+            }
+            index += count;
+        }
+        byte[] result = new byte[byteList.size()];
+        for (int i = 0; i < byteList.size(); i++) {
+            result[i] = byteList.get(i);
+        }
+        return result;
     }
 
     public static void main(String[] args) {
         String str = "Good body, you are good student";
         Node root = createHuffmanTree(str.getBytes());
-        visit(root, "", new HashMap<>());
+        Map<Byte, String> codeMap = getCodeMap(root);
         byte[] bytes = zip(str.getBytes());
         System.out.println("-------------");
-        System.out.println(byteToString((byte) Integer.parseInt("0010111", 2), false));
+        byte[] result = unZip(bytes, codeMap);
+        System.out.println(new String(result));
     }
 
 }
