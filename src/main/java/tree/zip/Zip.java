@@ -106,7 +106,8 @@ public class Zip {
      * @param bytes
      * @return
      */
-    public static byte[] zip(byte[] bytes) {
+    public static ZipMessage zip(byte[] bytes) {
+        ZipMessage message = new ZipMessage();
         Node root = createHuffmanTree(bytes);
         Map<Byte, String> codeMap = getCodeMap(root);
         StringBuilder sb = new StringBuilder();
@@ -131,13 +132,13 @@ public class Zip {
             }
             // 将8位二进制字符串转成byte
             newBytes[index++] = (byte) Integer.parseInt(byteStr, 2);
-            // TODO 输出最后一个二进制字符串的长度 7
             if (index >= len) {
-                System.out.println(byteStr);
-                System.out.println("最后一位长度: " + byteStr.length());
+                message.setLastLen(byteStr.length());
             }
         }
-        return newBytes;
+        message.setBytes(newBytes);
+        message.setCodeMap(codeMap);
+        return message;
     }
 
     /**
@@ -160,13 +161,12 @@ public class Zip {
      * @param bytes
      * @return
      */
-    public static byte[] unZip(byte[] bytes, Map<Byte, String> codeMap) {
+    public static byte[] unZip(byte[] bytes, Map<Byte, String> codeMap, int lastLen) {
         Map<String, Byte> decodeMap = getDecodeMap(codeMap);
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < bytes.length; i++) {
             if (i == bytes.length - 1) {
-                // TODO 最后一位为7位，后面得做处理
-                sb.append(byteToString(bytes[i], 7));
+                sb.append(byteToString(bytes[i], lastLen));
                 continue;
             }
             sb.append(byteToString(bytes[i], 8));
@@ -197,12 +197,10 @@ public class Zip {
     }
 
     public static void main(String[] args) {
-        String str = "Good body, you are good student";
+        String str = "Good body, you are good student, hi hi hi, one two three, *(H}]]}";
         Node root = createHuffmanTree(str.getBytes());
-        Map<Byte, String> codeMap = getCodeMap(root);
-        byte[] bytes = zip(str.getBytes());
-        System.out.println("-------------");
-        byte[] result = unZip(bytes, codeMap);
+        ZipMessage zipMessage = zip(str.getBytes());
+        byte[] result = unZip(zipMessage.getBytes(), zipMessage.getCodeMap(), zipMessage.getLastLen());
         System.out.println(new String(result));
     }
 
