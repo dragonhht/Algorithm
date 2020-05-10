@@ -1,8 +1,8 @@
 # 数据结构与算法
 
-##  [排序](./test/sort/Sort.java)
+##  [排序](./src/test/sort/Sort.java)
 
--   冒泡排序
+-   [冒泡排序](./src/test/java/sort/BubbleSort.kt)
 
 ```
 /**
@@ -49,7 +49,7 @@ public void testBucketSort() {
 }
 ```
 
--   快速排序
+-   [快速排序](./src/test/java/sort/QuickSort.kt)
 
 > 以一个数为基准，小于该数的移动至左侧，大于的移动至右侧。然后有对左侧两侧的数值循环进行该操作，直到各分区只有一个数
 
@@ -90,7 +90,7 @@ private void quickSort(int[] arr, int begin, int end) {
 }
 ```
 
--   插入排序
+-   [插入排序](./src/test/java/sort/InsertSort.kt)
 
 > 将数组分为两部分，一部分已经排序好的，一部分为排序的；依次从未排序的部分取出数据并按排序放入已排序的部分；
 
@@ -133,7 +133,7 @@ public void testShellSort() {
 }
 ```
 
--   简单选择排序
+-   [简单选择排序](./src/test/java/sort/SelectSort.kt)
 
 > 每次在待排序的数组中选择最大的或最小的进行排序
 
