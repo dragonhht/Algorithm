@@ -30,8 +30,8 @@ fun quickSort(array: Array<Int>, begin: Int, end: Int) {
         }
     }
     array[i] = key
-    quickSort(array, 0, i)
-    quickSort(array, i + 1, array.size - 1)
+    quickSort(array, begin, i - 1)
+    quickSort(array, i + 1, end)
 }
 
 fun main() {
