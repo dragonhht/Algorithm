@@ -1,5 +1,7 @@
 # 数据结构与算法
 
+## [常用算法设计方法](./DesignMethod.md)
+
 ##  [排序](./src/test/sort/Sort.java)
 
 -   [冒泡排序](./src/test/java/sort/BubbleSort.kt)
