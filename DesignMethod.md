@@ -94,6 +94,12 @@
 
 > 回溯法是一种选优搜索法，按选优条件向前搜索，以达到目标。但当探索到某一步时，发现原先选择并不优或达不到目标，就退回一步重新选择，这种走不通就退回再走的技术为回溯法
 
+-   示例
 
-
+    -   [八皇后问题](./src/test/java/divide/onquer/EightQueens.kt)
+    
+    -   [全排序问题](./src/test/java/divide/onquer/FullSort.kt)
+    
+    -   [数字拆分](./src/test/java/divide/onquer/DigitalSplit.kt)
+    
 ## 8、分支限界法
